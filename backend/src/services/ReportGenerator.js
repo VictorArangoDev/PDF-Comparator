@@ -85,16 +85,16 @@ export class ReportGenerator {
       ${diff.message ? `<p style="color: #666; margin-bottom: 15px;">${diff.message}</p>` : ''}
       <div class="images">
         <div class="image-container">
-          <img src="${path.relative(path.dirname(diff.reportPath || '.'), diff.originalImage)}" alt="Original">
+          <img src="${path.relative(path.dirname(diff.reportPath || '.'), diff.originalImage).replace("output", "..")}" alt="Original">
           <div class="image-label">Original</div>
         </div>
         <div class="image-container">
-          <img src="${path.relative(path.dirname(diff.reportPath || '.'), diff.modifiedImage)}" alt="Modificado">
+          <img src="${path.relative(path.dirname(diff.reportPath || '.'), diff.modifiedImage).replace("output", "..")}" alt="Modificado">
           <div class="image-label">Modificado</div>
         </div>
         ${diff.diffPath ? `
         <div class="image-container">
-          <img src="${path.relative(path.dirname(diff.reportPath || '.'), diff.diffPath)}" alt="Diferencias">
+          <img src="${path.relative(path.dirname(diff.reportPath || '.'), diff.diffPath).replace("output", "..")}" alt="Diferencias">
           <div class="image-label">Diferencias</div>
         </div>
         ` : ''}

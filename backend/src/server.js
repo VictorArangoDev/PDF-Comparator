@@ -110,6 +110,8 @@ app.post(
         message: error.message || "Error interno del servidor" 
       });
     }
+
+
   }
 );
 
@@ -188,11 +190,17 @@ try {
 app.get("/api/download-report", async (req, res) => {
   try {
     const pdfComparator = new PDFComparator();
-    return pdfComparator.DonwloadPDFReport(res);
+    // Opcionalmente, se puede pasar la ruta del HTML como query parameter
+    const htmlPath = req.query.htmlPath || null;
+    return await pdfComparator.downloadPDFReport(res, htmlPath);
 
   } catch (error) {
     console.error("Error en el endpoint /api/download-report:", error);
-    return res.status(500).json({ error: "Error interno del servidor" });
+    return res.status(500).json({ 
+      success: false,
+      error: "Error interno del servidor",
+      message: error.message 
+    });
   }
 });
 
