@@ -24,8 +24,8 @@ export class PDFComparator extends EventEmitter {
     this.reportGenerator = new ReportGenerator();
     this.pdfGenerator = new PDFGenerator();
     this.batchProcessor = new BatchProcessor(
-      this.config.processing.batchSize,
-      this.config.processing.maxConcurrent
+    this.config.processing.batchSize,
+    this.config.processing.maxConcurrent
     );
 
     // Almacenar la ruta del último reporte generado
