@@ -15,26 +15,10 @@ export class ImageComparator {
 
     return {
       match: result.match === true,
-      diffPercentage: this.calculateDiffPercentage(result),
-      rawResult: result
+      reason: result.reason ?? null, // "pixel-diff" | "layout-diff" | ...
+      // odiff ya entrega el porcentaje (0-100). Verifícalo con tu versión;
+      // la heurística anterior convertía 0.5% en 50%.
+      diffPercentage: Number(result.diffPercentage) || 0
     };
-  }
-
-  calculateDiffPercentage(result) {
-    if (!result.diffPercentage) return 0;
-    
-    let percentage = typeof result.diffPercentage === "number" 
-      ? result.diffPercentage 
-      : parseFloat(result.diffPercentage) || 0;
-
-    if (percentage > 1 && percentage <= 100) {
-      return percentage;
-    } else if (percentage > 100) {
-      return percentage / 100;
-    } else if (percentage > 0 && percentage <= 1) {
-      return percentage * 100;
-    }
-    
-    return 0;
   }
 }
